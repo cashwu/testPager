@@ -1,0 +1,30 @@
+﻿@using X.PagedList
+@using X.PagedList.Mvc.Core
+@using X.PagedList.Mvc.Core.Common
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Pager</h1>
+</div>
+
+<hr>
+
+<ul>
+    @foreach (var d in ViewBag.Data)
+    {
+        <li>@d.Id - @d.Name</li>
+    }
+</ul>
+
+@Html.PagedListPager((IPagedList)ViewBag.Data,
+    page => Url.Action("Index", "Home", new { page })
+    , new PagedListRenderOptions
+    {
+        LiElementClasses = new []{ "page-item" },
+        PageClasses = new[]{ "page-link" }
+    })
+
+
+<br><br>
